@@ -1,4 +1,3 @@
-call pathogen#infect()
 syntax on
 " Enable mouse support in console
 if has('mouse')
@@ -186,14 +185,3 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 set cursorline
 hi cursorline ctermbg=234
 
-if &term =~ '^xterm'
-    " solid underscore
-    let &t_SI .= "\<Esc>[0 q;"
-    " solid block
-    let &t_EI .= "\<Esc>[3 q"
-    " 1 or 0 -> blinking block
-    " 3 -> blinking underscore
-    " Recent versions of xterm (282 or above) also support
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
-endif

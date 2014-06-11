@@ -60,9 +60,10 @@ Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-dispatch'
 Bundle 'vim-scripts/tpp.vim'
 Bundle 'sjl/vitality.vim'
+Bundle 'flazz/vim-colorschemes'
 
 filetype plugin indent on
-colorscheme jellybeans
+colorscheme matrix
 
 syntax on
 " Enable mouse support in console
@@ -301,6 +302,7 @@ syntax sync minlines=256
 " ----------------
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
+let g:airline_theme='understated'
 "let g:airline_left_sep = ''
 "let g:airline_left_alt_sep = ''
 "let g:airline_right_sep = ''
@@ -344,3 +346,4 @@ set encoding=utf-8
 nmap <leader>. :bn<CR>
 nmap <leader>m :bp<CR>
 map <leader>q :bd<CR>
+nnoremap <leader>s :set nospell!<CR>

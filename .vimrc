@@ -348,3 +348,4 @@ nmap <leader>. :bn<CR>
 nmap <leader>m :bp<CR>
 map <leader>q :bd<CR>
 nnoremap <leader>s :set nospell!<CR>
+nnoremap <leader>p :set nopaste!<CR>

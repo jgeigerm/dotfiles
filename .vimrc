@@ -321,6 +321,7 @@ let g:pymode_lint_ignore = "E501,E701,E401,E201,E202,E302"
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_run_bind = '<leader>R'
+let g:pymode_options_max_line_length = 0
 " }}}
 
 " Jedi-Vim Settings

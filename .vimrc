@@ -49,8 +49,7 @@ Bundle 'elzr/vim-json'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
-
-" Testing Bundles
+Bundle 'davidhalter/jedi-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'PProvost/vim-ps1'
@@ -108,15 +107,6 @@ set formatlistpat=^\\s*\\(\\d\\\|[-*]\\)\\+[\\]:.)}\\t\ ]\\s* "and bullets, too
 set viminfo+=! " Store upper-case registers in viminfo
 set nomore " Short nomore
 
-" Folding
-set foldenable " Turn on folding
-set foldmethod=indent " Fold on the indent (damn you python)
-set foldlevel=100 " Don't autofold anything (but I can still fold manually)
-set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
-function SimpleFoldText() " {
-    return getline(v:foldstart).' '
-endfunction " }
-set foldtext=SimpleFoldText() " Custom fold text function (cleaner than default)
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | |  |   |      |  |     |    |
 "              | | | | |  |   |      |  |     |    + current column
@@ -274,8 +264,6 @@ hi cursorline ctermbg=234
 "  Filetype Association {{{1
 " ============================================================================
 
-au BufRead,BufNewFile *vimrc
-    \ set foldmethod=marker
 au BufRead,BufNewFile *.pp
     \ set filetype=puppet
 au BufWritePost ~/.bashrc !source %
@@ -326,9 +314,24 @@ let NERDTreeIgnore=['\.pyc$']
 " --------------------
 let g:pymode_lint_checker = "pyflakes,pep8"
 let g:pymode_lint_onfly = 0
-let g:pymode_folding = 0
-let g:pymode_rope_complete_on_dot = 0
+let g:pymode_folding = 1
+set foldlevel=20
+set foldnestmax=10
+let g:pymode_lint_ignore = "E501,E701,E401,E201,E202,E302"
+let g:pymode_rope = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_run_bind = '<leader>R'
 " }}}
+
+" Jedi-Vim Settings
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>u"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+autocmd FileType python setlocal completeopt-=preview
 
 " NERDTreeToggle {{{2
 " --------------

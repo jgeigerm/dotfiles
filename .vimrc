@@ -1,4 +1,5 @@
 "TODO: ORGANIZE
+"      Check OS and apply settings based on that
 set nocompatible
 
 " Setting up Vundle - the vim plugin bundler
@@ -250,34 +251,10 @@ set wildignore+=migrations                          " Django migrations
 set wildignore+=*.luac                              " Lua byte code
 set wildignore+=*.aux,*.out,*.toc                   " LaTeX intermediate files
 
-"function! HLNext (blinktime)
-"    highlight WhiteOnRed ctermfg=white ctermbg=red
-"    let [bufnum, lnum, col, off] = getpos('.')
-"    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-"    let target_pat = '\c\%#'.@/
-"    let ring = matchadd('WhiteOnRed', target_pat, 101)
-"    redraw
-"    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-"    call matchdelete(ring)
-"    redraw
-"endfunction
-
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 set cursorline
 hi cursorline ctermbg=234
-
-"if &term =~ '^xterm'
-"    " solid underscore
-"    let &t_SI .= "\<Esc>[0 q;"
-"    " solid block
-"    let &t_EI .= "\<Esc>[3 q"
-"    " 1 or 0 -> blinking block
-"    " 3 -> blinking underscore
-"    " Recent versions of xterm (282 or above) also support
-"    " 5 -> blinking vertical bar
-"    " 6 -> solid vertical bar
-"endif
 
 :command! WQ wq
 :command! Wq wq
@@ -389,15 +366,34 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#syntax#min_keyword_length = 4
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#enable_auto_select = 1
+let g:neocomplete#max_keyword_width = 75
+let g:neocomplete#auto_completion_start_length = 4
+let g:neocomplete#enable_cursor_hold_i = 1
+let g:neocomplete#cursor_hold_i_time = 1
+autocmd InsertEnter * call s:on_insert_enter()
+function! s:on_insert_enter()
+  if &updatetime > g:neocomplete#cursor_hold_i_time
+    let s:update_time_save = &updatetime
+    let &updatetime = g:neocomplete#cursor_hold_i_time
+  endif
+endfunction
+autocmd InsertLeave * call s:on_insert_leave()
+function! s:on_insert_leave()
+  if &updatetime < s:update_time_save
+    let &updatetime = s:update_time_save
+  endif
+endfunction
+
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  "return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -406,3 +402,8 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+let g:UltiSnipsExpandTrigger="<C-s>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets="<C-a>"

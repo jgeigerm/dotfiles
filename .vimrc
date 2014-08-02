@@ -1,6 +1,5 @@
+"TODO: ORGANIZE!
 set nocompatible
-" If vimrc has been modified, re-source it for fast modifications
-"autocmd! BufWritePost *vimrc source %
 
 " Setting up Vundle - the vim plugin bundler
 let iCanHazVundle=1
@@ -28,39 +27,64 @@ endif
 " Required Plugins
 Bundle 'gmarik/vundle'
 
-" Approved Bundles
+" Bundles
+"Invoke with :Tab /<regex> and this will align things for you!
 Bundle 'godlygeek/tabular'
-Bundle 'klen/python-mode'
+"python extensions: <ldr>b for breakpoint
+Bundle 'klen/python-mode' 
+"pound searches for other instances of word under cursor, <leader>* does something too
 Bundle 'nelstrom/vim-visual-star-search'
+"file browser mapped to <leader>n
 Bundle 'scrooloose/nerdtree'
+"for repeating non native commands with .
 Bundle 'tpope/vim-repeat'
+"for adding and subtracting dates
 Bundle 'tpope/vim-speeddating'
+"good for changing quotes and stuff cs, ds
 Bundle 'tpope/vim-surround'
+"Quote and brace auto-closer, nice
 Bundle 'Townk/vim-autoclose'
-"Bundle 'vim-scripts/AutoClose'
-Bundle 'pangloss/vim-javascript'
+"js addons
+"Bundle 'pangloss/vim-javascript'
+"Bottom toolbar
 Bundle 'bling/vim-airline'
+"Top buffer toolbar
 Bundle 'bling/vim-bufferline'
-Bundle 'puppetlabs/puppet-syntax-vim'
+"Puppet stuff
+"Bundle 'puppetlabs/puppet-syntax-vim'
+"framework for code errors and checking in file
 Bundle 'scrooloose/syntastic'
-Bundle 'tristen/vim-sparkup'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'elzr/vim-json'
+"quick markup, will learn someday, off for now
+"Bundle 'tristen/vim-sparkup'
+"json utils
+"Bundle 'elzr/vim-json'
+"little utils that make everything smoother
 Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/vim-snippets'
+"random library functions to make stuff easier
+"Bundle 'tomtom/tlib_vim'
+"python autocompletion and documentation
 Bundle 'davidhalter/jedi-vim'
+"git integration :G<command>
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
-Bundle 'PProvost/vim-ps1'
+"powershell stuff
+"Bundle 'PProvost/vim-ps1'
+""break bad arrowing habits
 Bundle 'takac/vim-hardtime'
+"Move around easier in a file with \ (w, s)
 Bundle 'Lokaltog/vim-easymotion'
+"stuff expansion!
 Bundle 'SirVer/ultisnips'
-
+Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-dispatch'
 Bundle 'vim-scripts/tpp.vim'
 Bundle 'sjl/vitality.vim'
+"All of the colors
 Bundle 'flazz/vim-colorschemes'
+"neat visuals on undoing stuff, mapped to <ldr>u
+Bundle 'mbbill/undotree'
+"Autocompletes
+Bundle 'Shougo/neocomplete.vim'
 
 filetype plugin indent on
 colorscheme matrix
@@ -353,3 +377,28 @@ nmap <leader>m :bp<CR>
 map <leader>q :bd<CR>
 nnoremap <leader>s :set nospell!<CR>
 nnoremap <leader>p :set nopaste!<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
+map \ <Plug>(easymotion-prefix)
+nnoremap <leader>c :NeoCompleteDisable!<CR>
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()

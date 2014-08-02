@@ -250,34 +250,10 @@ set wildignore+=migrations                          " Django migrations
 set wildignore+=*.luac                              " Lua byte code
 set wildignore+=*.aux,*.out,*.toc                   " LaTeX intermediate files
 
-"function! HLNext (blinktime)
-"    highlight WhiteOnRed ctermfg=white ctermbg=red
-"    let [bufnum, lnum, col, off] = getpos('.')
-"    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-"    let target_pat = '\c\%#'.@/
-"    let ring = matchadd('WhiteOnRed', target_pat, 101)
-"    redraw
-"    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-"    call matchdelete(ring)
-"    redraw
-"endfunction
-
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 set cursorline
 hi cursorline ctermbg=234
-
-"if &term =~ '^xterm'
-"    " solid underscore
-"    let &t_SI .= "\<Esc>[0 q;"
-"    " solid block
-"    let &t_EI .= "\<Esc>[3 q"
-"    " 1 or 0 -> blinking block
-"    " 3 -> blinking underscore
-"    " Recent versions of xterm (282 or above) also support
-"    " 5 -> blinking vertical bar
-"    " 6 -> solid vertical bar
-"endif
 
 :command! WQ wq
 :command! Wq wq

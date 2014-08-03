@@ -353,9 +353,10 @@ nmap <leader>n :call NERDTreeToggleOrFocus()<CR>
 set backspace=2
 set encoding=utf-8
 
-nmap <leader>. :bn<CR>
-nmap <leader>m :bp<CR>
-map <leader>q :bd<CR>
+nmap <leader>. :tabn<CR>
+nmap <leader>m :tabp<CR>
+nmap <leader>q :tabc<CR>
+nmap <leader>t :tabnew<CR>
 nnoremap <leader>s :set nospell!<CR>
 nnoremap <leader>p :set nopaste!<CR>
 nnoremap <leader>u :UndotreeToggle<CR>

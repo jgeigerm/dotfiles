@@ -366,27 +366,11 @@ let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 4
+let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplete#enable_auto_select = 1
 let g:neocomplete#max_keyword_width = 75
 let g:neocomplete#auto_completion_start_length = 4
-let g:neocomplete#enable_cursor_hold_i = 1
-let g:neocomplete#cursor_hold_i_time = 1
-autocmd InsertEnter * call s:on_insert_enter()
-function! s:on_insert_enter()
-  if &updatetime > g:neocomplete#cursor_hold_i_time
-    let s:update_time_save = &updatetime
-    let &updatetime = g:neocomplete#cursor_hold_i_time
-  endif
-endfunction
-autocmd InsertLeave * call s:on_insert_leave()
-function! s:on_insert_leave()
-  if &updatetime < s:update_time_save
-    let &updatetime = s:update_time_save
-  endif
-endfunction
-
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -403,7 +387,7 @@ inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
 
-let g:UltiSnipsExpandTrigger="<C-s>"
+let g:UltiSnipsExpandTrigger="<C-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsListSnippets="<C-a>"

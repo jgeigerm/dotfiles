@@ -88,7 +88,7 @@ Bundle 'mbbill/undotree'
 Bundle 'Shougo/neocomplete.vim'
 
 filetype plugin indent on
-colorscheme matrix
+colorscheme charged-256
 
 syntax on
 " Enable mouse support in console
@@ -233,7 +233,7 @@ set ruler
 " Use english for spellchecking, but don't spellcheck by default
 if version >= 700
     set spl=en spell
-    set spell
+    set nospell
 endif
 
 " Ignore this list of file extensions
@@ -254,7 +254,9 @@ set wildignore+=*.aux,*.out,*.toc                   " LaTeX intermediate files
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 set cursorline
+set cursorcolumn
 hi cursorline ctermbg=234
+hi cursorcolumn ctermbg=234
 
 :command! WQ wq
 :command! Wq wq
@@ -293,13 +295,13 @@ syntax sync minlines=256
 let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
 if has("macunix")
-  let g:airline_theme='understated'
+  let g:airline_theme='serene'
 else
   let g:airline_theme='laederon'
 endif
-"let g:airline_left_sep = ''
+let g:airline_left_sep = '|'
 "let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
+let g:airline_right_sep = '|'
 "let g:airline_right_alt_sep = ''
 " }}}
 " Vim Session Persist {{{2
@@ -337,6 +339,9 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>u"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
+let g:jedi#popup_select_first=0
+let g:jedi#popup_on_dot = 0
+autocmd  FileType python let b:did_ftplugin = 1
 autocmd FileType python setlocal completeopt-=preview
 
 " NERDTreeToggle {{{2
@@ -392,3 +397,6 @@ let g:UltiSnipsExpandTrigger="<C-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsListSnippets="<C-a>"
+
+set colorcolumn=80
+highlight ColorColumn ctermbg=0

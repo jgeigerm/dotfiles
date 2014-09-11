@@ -269,6 +269,11 @@ if version >= 700
     set nospell
 endif
 
+syn sync fromstart
+set foldmethod=syntax
+set foldlevel=20
+set foldnestmax=10
+
 " Ignore this list of file extensions
 " wildignore extended from Erik Harmon's ignore list
 set wildignore=*.bak
@@ -351,8 +356,6 @@ let NERDTreeIgnore=['\.pyc$']
 let g:pymode_lint_checker = "pyflakes,pep8"
 let g:pymode_lint_onfly = 0
 let g:pymode_folding = 1
-set foldlevel=20
-set foldnestmax=10
 let g:pymode_lint_ignore = "E501,E701,E401,E201,E202,E302"
 let g:pymode_rope = 0
 let g:pymode_rope_lookup_project = 0

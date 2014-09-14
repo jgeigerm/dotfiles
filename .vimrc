@@ -257,7 +257,7 @@ set listchars=tab:>-,trail:-    ",eol:¬ or eol:$
 set formatoptions=rw    " Automatically insert command leader on return and let gq format comments
 set shiftround          " When at 3 spaces and hit > ... go to 4, not 5
 
-set novisualbell
+set visualbell
 set noerrorbells
 set wildmenu                    " Turn on wild menu
 set wildmode=list:longest,full  " Turn on wild mode huge list

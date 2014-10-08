@@ -1,6 +1,7 @@
 "TODO: ORGANIZE
 "      Check OS and apply settings based on that
 set nocompatible
+filetype off
 
 " Setting up Vundle - the vim plugin bundler
 let iCanHazVundle=1
@@ -44,7 +45,8 @@ Bundle 'tpope/vim-speeddating'
 "good for changing quotes and stuff cs, ds
 Bundle 'tpope/vim-surround'
 "Quote and brace auto-closer, nice
-Bundle 'Townk/vim-autoclose'
+Bundle 'Raimondi/delimitMate'
+"Bundle 'Townk/vim-autoclose'
 "js addons
 "Bundle 'pangloss/vim-javascript'
 "Bottom toolbar
@@ -69,7 +71,7 @@ Bundle 'davidhalter/jedi-vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 "powershell stuff
-"Bundle 'PProvost/vim-ps1'
+Bundle 'PProvost/vim-ps1'
 ""break bad arrowing habits
 Bundle 'takac/vim-hardtime'
 "Move around easier in a file with \ (w, s)
@@ -87,8 +89,14 @@ Bundle 'mbbill/undotree'
 "Autocompletes
 if filereadable(expand('$HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_client_support.so'))
     Bundle 'Valloric/YouCompleteMe'
+    let g:ycm_auto_trigger = 1
+    let g:ycm_filetype_whitelist = { '*': 1 }
+    let g:ycm_warning_symbol = '!!'
+    let g:ycm_min_num_of_chars_for_completion = 3
+    let g:ycm_global_ycm_extra_conf = expand('$HOME/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py')
+    let g:ycm_enable_diagnostic_highlighting = 0
 else
-    if has('Lua')
+    if has('Lua') and !has('macunix')
         Bundle 'Shougo/neocomplete.vim'
         nnoremap <leader>c :NeoCompleteDisable!<CR>
 
@@ -313,6 +321,7 @@ au BufRead,BufNewFile *_spec.rb
 augroup PatchDiffHighlight
 autocmd!
 autocmd BufEnter *.patch,*.rej,*.diff syntax enable
+au BufRead,BufNewFile *.c set filetype=c
 augroup END
 
 
@@ -399,9 +408,6 @@ nnoremap <leader>p :set nopaste!<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 map \ <Plug>(easymotion-prefix)
 
-let g:ycm_min_num_of_chars_for_completion = 3
-let g:ycm_global_ycm_extra_conf = expand('$HOME/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py')
-let g:ycm_enable_diagnostic_highlighting = 0
 
 let g:UltiSnipsExpandTrigger="<C-g>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
